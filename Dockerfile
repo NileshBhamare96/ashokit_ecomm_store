@@ -8,9 +8,10 @@ RUN npm run build --prod
 
 FROM nginx:alpine
 
-# Copy all files inside the 'browser' folder to Nginx root
+# Copy Angular build to Nginx root
 COPY --from=build /app/dist/ecommerce_frontend/browser/. /usr/share/nginx/html/
 
+# Copy custom Nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
-
-
